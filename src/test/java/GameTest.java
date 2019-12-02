@@ -4,7 +4,7 @@ import ua.training.Dice;
 import ua.training.Game;
 import ua.training.Player;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -46,5 +46,23 @@ public class GameTest {
 
         assertEquals(4, dice.roll());
         assertEquals(5, player.getPosition());
+    }
+
+    @Test
+    public void shouldWinGame_whenMoveFrom97By3() {
+        player.setPosition(97);
+        game.movePlayer(player, 3);
+
+        assertEquals(100, player.getPosition());
+        assertTrue(game.isWin(player.getPosition()));
+    }
+
+    @Test
+    public void shouldStay_whenMoveFrom97By4(){
+        player.setPosition(97);
+        game.movePlayer(player,4);
+
+        assertEquals(97,player.getPosition());
+        assertFalse(game.isWin(player.getPosition()));
     }
 }
