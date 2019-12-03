@@ -15,7 +15,7 @@ public class GameTest {
 
     @Before
     public void init() {
-        game = new Game(player);
+        game = new Game(player,dice);
     }
 
     @Test
@@ -64,5 +64,41 @@ public class GameTest {
 
         assertEquals(97,player.getPosition());
         assertFalse(game.isWin(player.getPosition()));
+    }
+
+    @Test
+    public void shouldBeOnCell2_whenMoveToCell12(){
+        game.addSnake(12,2);
+        player.setPosition(10);
+        game.movePlayer(player,2);
+
+        assertEquals(2,player.getPosition());
+    }
+    @Test
+    public void shouldBeOnCell2_whenMoveToCell2(){
+        game.addSnake(12,2);
+
+        game.movePlayer(player,1);
+
+        assertEquals(2,player.getPosition());
+    }
+
+    @Test
+    public void shouldBeOnCell12_whenMoveToCell2(){
+        game.addLadder(2,12);
+
+        game.movePlayer(player,1);
+
+        assertEquals(12,player.getPosition());
+    }
+
+    @Test
+    public void shouldBeOnCell12_whenMoveToCell12(){
+        game.addLadder(2,12);
+        player.setPosition(10);
+        game.movePlayer(player,2);
+
+        assertEquals(12,player.getPosition());
+
     }
 }
